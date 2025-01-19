@@ -6,7 +6,7 @@
 
 - **泛型支援**：輕鬆存取任意類型資料，免除繁瑣的類型轉換。
 - **併發安全**：基於 `sync.Map` 的設計，確保多協程操作的一致性。
-- **自動清理**： 內建過期檢查機制，自動清除無效資料。
+- **自動清理**：內建過期檢查機制，自動清除無效資料。
 - **多鍵組合**：支援多參數組合產生唯一鍵值，滿足複雜快取場景。
 - **彈性設定**：支援每筆快取資料自訂存活時間，並提供預設存活時間設定。
 
@@ -28,7 +28,7 @@ import "github.com/yttsai1511/go-cache-toolkit"
 
 ```go
 // 設定快取資料，存活時間為 3 秒
-cache.SetWithTTL("Hello, Go!", 3*time.Second, "greeting")
+cache.SetWithTTL("Hello, Go!", 3 * time.Second, "greeting")
 
 value, err := cache.Get[string]("greeting")
 if err != nil {
@@ -45,9 +45,12 @@ time.Sleep(5 * time.Second)
 // 資料已過期
 value, err = cache.Get[string]("greeting") 
 if err != nil {
-	fmt.Println("Cache has expired or does not exist")
+	fmt.Println("Error:", err)
 	return
 }
+
+// Error:
+// Item for key greeting has expired
 ```
 
 ## 文件說明
